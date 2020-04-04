@@ -1,4 +1,5 @@
 object Fibonacci{
+    @annotation.tailrec
     def fib_cal(n: Int): Int = {
         if (n == 1) 0
         else if (n == 2) 1
