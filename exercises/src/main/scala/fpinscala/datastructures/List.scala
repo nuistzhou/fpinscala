@@ -23,6 +23,14 @@ object List { // `List` companion object. Contains functions for creating and wo
     if (as.isEmpty) Nil
     else Cons(as.head, apply(as.tail: _*))
 
+  // Exercise 3.2
+  def tail[A](l: List[A]): List[A] = 
+  l match {
+    case Nil => Nil
+    case Cons(_, t) => t
+  }
+
+
   val x = List(1,2,3,4,5) match {
     case Cons(x, Cons(2, Cons(4, _))) => x
     case Nil => 42
