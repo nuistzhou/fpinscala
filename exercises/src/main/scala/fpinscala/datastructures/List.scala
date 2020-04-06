@@ -23,14 +23,6 @@ object List { // `List` companion object. Contains functions for creating and wo
     if (as.isEmpty) Nil
     else Cons(as.head, apply(as.tail: _*))
 
-  // Exercise 3.2
-  def tail[A](l: List[A]): List[A] = 
-  l match {
-    case Nil => Nil
-    case Cons(_, t) => t
-  }
-
-
   val x = List(1,2,3,4,5) match {
     case Cons(x, Cons(2, Cons(4, _))) => x
     case Nil => 42
@@ -38,6 +30,29 @@ object List { // `List` companion object. Contains functions for creating and wo
     case Cons(h, t) => h + sum(t)
     case _ => 101
   }
+
+    // Exercise 3.2
+  def tail[A](l: List[A]): List[A] = 
+  l match {
+    case Nil => Nil
+    case Cons(_, t) => t
+  }
+
+  // Exercise 3.3
+  def setHead[A](l: List[A], h: A): List[A] = 
+  l match {
+    case Nil => sys.error("setHead on an empty list.")
+    case Cons(_, ls) => Cons(h, ls)
+  }
+
+  // Exercise 3.4
+  def drop[A] (l: List[A], n: Int): List[A] =
+  if (n <=0 ) l
+  else l match {
+      case Nil => sys.error("drop an empty list.")
+      case Cons(_, ls) => drop(ls, n-1)
+    }
+
 
   def append[A](a1: List[A], a2: List[A]): List[A] =
     a1 match {
