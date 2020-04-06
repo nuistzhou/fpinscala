@@ -31,29 +31,6 @@ object List { // `List` companion object. Contains functions for creating and wo
     case _ => 101
   }
 
-    // Exercise 3.2
-  def tail[A](l: List[A]): List[A] = 
-  l match {
-    case Nil => Nil
-    case Cons(_, t) => t
-  }
-
-  // Exercise 3.3
-  def setHead[A](l: List[A], h: A): List[A] = 
-  l match {
-    case Nil => sys.error("setHead on an empty list.")
-    case Cons(_, ls) => Cons(h, ls)
-  }
-
-  // Exercise 3.4
-  def drop[A] (l: List[A], n: Int): List[A] =
-  if (n <=0 ) l
-  else l match {
-      case Nil => sys.error("drop an empty list.")
-      case Cons(_, ls) => drop(ls, n-1)
-    }
-
-
   def append[A](a1: List[A], a2: List[A]): List[A] =
     a1 match {
       case Nil => a2
@@ -73,13 +50,28 @@ object List { // `List` companion object. Contains functions for creating and wo
     foldRight(ns, 1.0)(_ * _) // `_ * _` is more concise notation for `(x,y) => x * y`; see sidebar
 
 
-  def tail[A](l: List[A]): List[A] = ???
+  def tail[A](l: List[A]): List[A] = 
+    l match {
+      case Nil => Nil
+      case Cons(_, t) => t
+    }
+  def setHead[A](l: List[A], h: A): List[A] = 
+    l match {
+      case Nil => sys.error("setHead on an empty list.")
+      case Cons(_, ls) => Cons(h, ls)
+    }
+  def drop[A](l: List[A], n: Int): List[A] = 
+    if (n <=0 ) l
+    else l match {
+        case Nil => sys.error("drop an empty list.")
+        case Cons(_, ls) => drop(ls, n-1)
+      }
 
-  def setHead[A](l: List[A], h: A): List[A] = ???
-
-  def drop[A](l: List[A], n: Int): List[A] = ???
-
-  def dropWhile[A](l: List[A], f: A => Boolean): List[A] = ???
+  def dropWhile[A](l: List[A], f: A => Boolean): List[A] = 
+      l match {
+        case Cons(t, ls) if f(t) => dropWhile(ls, f)
+        case _ => l
+      }
 
   def init[A](l: List[A]): List[A] = ???
 
